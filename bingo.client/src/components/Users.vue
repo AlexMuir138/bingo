@@ -1,7 +1,7 @@
 <template>
   <div class="mx-1">
     <div class="stats d-flex align-items-center justify-content-around">
-      <QDialogCard>
+      <QDialogCard :dialog-class="isMobile ? 'maximize':''">
         <QBtn class="p-0">
           <span class="text-muted badge text-uppercase"><QIcon icon="mdi-cat" /> Online: {{ users.length }} </span>
         </QBtn>
@@ -22,10 +22,10 @@
                 </div>
               </div>
             </div>
-            <div class="card-body bg-light darken-20">
+            <div class="card-body bg-light darken-20 full">
               <div class="container">
                 <div class="d-flex flex-wrap">
-                  <div class="col-3 mb-4" v-for="u in users" :key="u.id">
+                  <div class="col-lg-3 col-12 mb-4" v-for="u in users" :key="u.id">
                     <div class="bg-dark p-2 rounded elevation-2 text-center">
                       <div class="rounded lg">
                         <img :src="u.picture" class="p-1 rounded" height="120" width="120">
@@ -41,7 +41,7 @@
           </div>
         </template>
       </QDialogCard>
-      <QDialogCard>
+      <QDialogCard :dialog-class="isMobile ? 'maximize':''">
         <QBtn class="p-0">
           <span class="text-muted badge text-uppercase"><QIcon icon="mdi-seal" /> Bingos: {{ bingos.length }} </span>
         </QBtn>
@@ -62,7 +62,7 @@
                 </div>
               </div>
             </div>
-            <div class="card-body bg-light darken-20">
+            <div class="card-body bg-light darken-20 full">
               <div class="w-100">
                 <QCollapse class="elevation-2" v-for="b in bingos" :key="b.id">
                   <template #trigger="{show}">
@@ -104,9 +104,11 @@
 <script>
 import { computed, reactive } from 'vue'
 import { AppState } from '../AppState'
+import { UTILS } from '@bcwdev/quickvue'
 export default {
   setup() {
     return reactive({
+      isMobile: computed(() => UTILS.isMobile),
       user: computed(() => AppState.user),
       users: computed(() => AppState.users),
       bingos: computed(() => AppState.bingos)
@@ -177,4 +179,7 @@ export default {
   transition: all .2s linear;
 }
 
+.full{
+  min-height: calc(100vh - 86px);
+}
 </style>
