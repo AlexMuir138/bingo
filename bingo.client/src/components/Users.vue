@@ -23,15 +23,19 @@
               </div>
             </div>
             <div class="card-body bg-light darken-20">
-              <div class="w-100">
-                <QList>
-                  <QListItem class="user lg my-3 d-flex" v-for="u in users" :key="u.id">
-                    <img :src="u.picture" class="img-fluid lg p-1 rounded">
-                    <h2 class="ml-4">
-                      {{ u.name }}
-                    </h2>
-                  </QListItem>
-                </QList>
+              <div class="container">
+                <div class="d-flex flex-wrap">
+                  <div class="col-3 mb-4" v-for="u in users" :key="u.id">
+                    <div class="bg-dark p-2 rounded elevation-2 text-center">
+                      <div class="rounded lg">
+                        <img :src="u.picture" class="p-1 rounded" height="120" width="120">
+                      </div>
+                      <kbd class="my-2 clip-text bg-secondary lighten-40 badge">
+                        {{ u.name }}
+                      </kbd>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
