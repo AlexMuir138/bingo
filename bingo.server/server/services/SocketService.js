@@ -80,6 +80,10 @@ class SocketService {
 
       socket.on('set:user', (user) => {
         if (user) {
+          if (socket.userInfo) {
+            delete users[socket.userInfo.id]
+            this.messageRoom('general', 'user:disconnected', socket.userInfo)
+          }
           socket.userInfo = user
           users[socket.userInfo.id] = user
           this.messageRoom('general', 'user:connected', user)
